@@ -1,3 +1,382 @@
+// Message alternatives storage - comprehensive collection of motivational messages
+const MESSAGE_ALTERNATIVES = {
+    general: {
+        default: [
+            ["You're doing amazing! 🌟", "You're incredible! ✨", "You're fantastic! 💫", "You're outstanding! 🎯"],
+            ["Keep up the great work! 💪", "You're crushing it! 🔥", "Amazing progress! 🚀", "Outstanding effort! ⚡"],
+            ["Every day counts! 🎯", "Each moment matters! ⏰", "Progress adds up! 📈", "Small steps, big results! 🌱"],
+            ["You've got this! 🚀", "You're unstoppable! 💥", "Nothing can stop you! 🌪️", "You're a force! ⚡"],
+            ["Consistency is key! 🔑", "Steady wins the race! 🏃", "Persistence pays off! 💰", "Keep going strong! 💪"],
+            ["Stay strong! 💎", "You're resilient! 🛡️", "Inner strength shines! ✨", "Tough and determined! 🔥"],
+            ["You're unstoppable! ⚡", "Nothing holds you back! 🌊", "Unbreakable spirit! 💎", "Limitless potential! 🚀"],
+            ["One day at a time! 🌈", "Focus on today! 🎯", "Present moment power! ⚡", "Step by step! 👣"],
+            ["You're on fire! 🔥", "Blazing with determination! 🌟", "Ignited passion! 💥", "Burning bright! ✨"],
+            ["Believe in yourself! ✨", "Self-confidence soars! 🚀", "Trust your journey! 🌟", "You are capable! 💪"],
+            ["Progress over perfection! 🎨", "Growth mindset wins! 🌱", "Learning and improving! 📚", "Every attempt counts! 🎯"],
+            ["You're a champion! 🏆", "Victory is yours! 🥇", "Triumphant spirit! 👑", "Winner mentality! 💫"]
+        ],
+        milestones: {
+            0: [
+                "Great start! The first step is always the hardest! 🌱",
+                "Every journey begins with a single step! 🌟",
+                "The adventure starts now! Your story begins! 📖",
+                "First moments are the foundation of greatness! 🏗️",
+                "You've taken the leap! Courage in action! 💪"
+            ],
+            1: [
+                "You made it one full day! Incredible! 🎉",
+                "24 hours of commitment! You're amazing! ⏰",
+                "One day down, countless more to go! 🌟",
+                "Your first milestone achieved! Celebration time! 🎊",
+                "Day one complete! The momentum builds! 🚀"
+            ],
+            7: [
+                "One full week! You're building real habits! 🌟",
+                "Seven days of consistency! Habit forming! 📅",
+                "A week of dedication! You're committed! 💪",
+                "Seven days strong! The pattern emerges! 🔄",
+                "One week milestone! Your journey deepens! 🌈"
+            ],
+            30: [
+                "30 days! You're a habit-building machine! 👑",
+                "A month of dedication! True commitment! 📆",
+                "Thirty days of progress! You're unstoppable! 🚀",
+                "One month milestone! Habits become lifestyle! 🌟",
+                "30 days strong! Your transformation shows! ✨"
+            ],
+            100: [
+                "100 DAYS! You're absolutely legendary! 💯",
+                "A century of commitment! You're a champion! 🏆",
+                "100 days of excellence! Legendary status! 👑",
+                "Triple digits! Your perseverance inspires! 🌟",
+                "100 days milestone! You're a true warrior! ⚔️"
+            ]
+        }
+    },
+    streak_badges: {
+        just_started: [
+            { emoji: '🌱', text: 'Just Started!', class: 'new', messages: [
+                "Every journey begins with a single step! 🌟",
+                "First steps are the foundation of greatness! 🏗️",
+                "The adventure starts now! Your story begins! 📖",
+                "You've taken the leap! Courage in action! 💪",
+                "New beginnings hold infinite potential! ✨"
+            ]},
+            { emoji: '🌱', text: 'Just Started!', class: 'new', messages: [
+                "The spark of commitment ignites! 🔥",
+                "Your path unfolds before you! 🛤️",
+                "Every expert was once a beginner! 🌟",
+                "The seed of success is planted! 🌱",
+                "Your journey of a thousand miles begins! 👣"
+            ]}
+        ],
+        five_minutes: [
+            { emoji: '🌿', text: '5+ Minutes!', class: 'new', messages: [
+                "Great momentum! Keep that energy flowing! 💫",
+                "Five minutes of focus! The flow begins! 🌊",
+                "Initial commitment showing results! 📈",
+                "First milestone achieved! You're moving! 🚀",
+                "Five minutes of dedication! Building steam! 💨"
+            ]},
+            { emoji: '🌿', text: '5+ Minutes!', class: 'new', messages: [
+                "The momentum is building! Your effort shows! 💪",
+                "Five minutes down, countless more ahead! ⏰",
+                "Early progress creates lasting habits! 🔄",
+                "Your dedication is already paying off! 💰",
+                "Five minutes of focus = infinite potential! ✨"
+            ]}
+        ],
+        fifteen_minutes: [
+            { emoji: '🍀', text: '15+ Minutes!', class: 'new', messages: [
+                "You're building something amazing! 🌈",
+                "Quarter hour of commitment! Dedication shows! ⏱️",
+                "Fifteen minutes of focus! You're in the zone! 🎯",
+                "Your persistence is creating results! 📊",
+                "Fifteen minutes milestone! The habit forms! 🌟"
+            ]},
+            { emoji: '🍀', text: '15+ Minutes!', class: 'new', messages: [
+                "Building momentum with every minute! 💨",
+                "Fifteen minutes of excellence! Quality time! ⭐",
+                "Your commitment deepens! Stronger every day! 💪",
+                "Quarter hour achievement! Progress accelerates! 🚀",
+                "Fifteen minutes of pure determination! 🔥"
+            ]}
+        ],
+        thirty_minutes: [
+            { emoji: '🌳', text: '30+ Minutes!', class: 'building', messages: [
+                "Half an hour of dedication! You're unstoppable! ⚡",
+                "Thirty minutes of focus! Deep work achieved! 🧠",
+                "Half hour milestone! Your commitment shines! ✨",
+                "Thirty minutes of progress! Building strength! 💪",
+                "Half an hour of excellence! You're crushing it! 🔥"
+            ]},
+            { emoji: '🌳', text: '30+ Minutes!', class: 'building', messages: [
+                "Thirty minutes of pure determination! ⏰",
+                "Half hour of commitment! The habit solidifies! 🏗️",
+                "Thirty minutes achievement! Momentum builds! 💨",
+                "Your dedication spans half an hour! Impressive! 👏",
+                "Thirty minutes of focused energy! ⚡"
+            ]}
+        ],
+        one_hour: [
+            { emoji: '💪', text: '1+ Hour!', class: 'building', messages: [
+                "An hour of focus! Your determination shines! ✨",
+                "Sixty minutes of commitment! True dedication! ⏱️",
+                "One hour milestone! You're in deep focus! 🌊",
+                "An hour of progress! Building real momentum! 💨",
+                "Sixty minutes of excellence! You're amazing! ⭐"
+            ]},
+            { emoji: '💪', text: '1+ Hour!', class: 'building', messages: [
+                "One hour of pure determination! 🔥",
+                "Sixty minutes of focused energy! 💪",
+                "An hour achievement! The zone is yours! 🎯",
+                "One hour of commitment! Your strength shows! 🛡️",
+                "Sixty minutes milestone! Unstoppable force! ⚡"
+            ]}
+        ],
+        three_hours: [
+            { emoji: '💫', text: '3+ Hours!', class: 'building', messages: [
+                "Three hours of commitment! You're a force! 🚀",
+                "Three hours of focus! Deep work mastery! 🧠",
+                "Three hours achievement! Incredible stamina! 💪",
+                "Three hours of dedication! Your power grows! ⚡",
+                "Three hours milestone! You're unstoppable! 🔥"
+            ]},
+            { emoji: '💫', text: '3+ Hours!', class: 'building', messages: [
+                "Three hours of pure determination! ⏰",
+                "Three hours of excellence! Quality focus! ⭐",
+                "Three hours achievement! Building empires! 🏗️",
+                "Your commitment spans three hours! Amazing! 👏",
+                "Three hours of focused energy! 💫"
+            ]}
+        ],
+        six_hours: [
+            { emoji: '⭐', text: '6+ Hours!', class: 'building', messages: [
+                "Six hours of dedication! You're incredible! 🌟",
+                "Six hours of focus! Marathon commitment! 🏃",
+                "Six hours achievement! Your endurance shines! 💪",
+                "Six hours of progress! Building greatness! 🏗️",
+                "Six hours milestone! You're a champion! 🏆"
+            ]},
+            { emoji: '⭐', text: '6+ Hours!', class: 'building', messages: [
+                "Six hours of pure determination! 🔥",
+                "Six hours of excellence! Quality sustained! ⭐",
+                "Six hours achievement! Deep focus mastery! 🌊",
+                "Your commitment spans six hours! Incredible! ⏰",
+                "Six hours of focused energy! 💫"
+            ]}
+        ],
+        twelve_hours: [
+            { emoji: '✨', text: '12+ Hours!', class: 'strong', messages: [
+                "Half a day of consistency! You're amazing! 🎯",
+                "Twelve hours of commitment! True dedication! ⏱️",
+                "Half day milestone! Your persistence pays! 💰",
+                "Twelve hours of progress! Building legacy! 🏛️",
+                "Half day achievement! You're unstoppable! ⚡"
+            ]},
+            { emoji: '✨', text: '12+ Hours!', class: 'strong', messages: [
+                "Twelve hours of pure determination! 🔥",
+                "Half day of excellence! Quality sustained! ⭐",
+                "Twelve hours achievement! Deep focus legend! 🌟",
+                "Your commitment spans half a day! Amazing! ⏰",
+                "Twelve hours of focused energy! ✨"
+            ]}
+        ],
+        one_day: [
+            { emoji: '🎯', text: '1 Day!', class: 'strong', messages: [
+                "Your first full day! A beautiful beginning! 🌅",
+                "One day achievement! The journey deepens! 🌟",
+                "24 hours milestone! Your commitment shines! ✨",
+                "One day of dedication! Building real habits! 🏗️",
+                "First day complete! Your story unfolds! 📖"
+            ]},
+            { emoji: '🎯', text: '1 Day!', class: 'strong', messages: [
+                "One day of pure determination! 🔥",
+                "24 hours of excellence! Quality sustained! ⭐",
+                "One day achievement! Foundation solid! 🏛️",
+                "Your commitment spans a full day! Amazing! ⏰",
+                "One day of focused energy! 🎯"
+            ]}
+        ],
+        two_days: [
+            { emoji: '🚀', text: '2 Days!', class: 'strong', messages: [
+                "Two days strong! Your momentum is building! 💪",
+                "Two days achievement! Consistency emerging! 📈",
+                "48 hours milestone! Your dedication grows! 🌱",
+                "Two days of progress! Building momentum! 💨",
+                "Two days commitment! You're getting stronger! 🛡️"
+            ]},
+            { emoji: '🚀', text: '2 Days!', class: 'strong', messages: [
+                "Two days of pure determination! 🔥",
+                "48 hours of excellence! Quality sustained! ⭐",
+                "Two days achievement! Pattern forming! 🔄",
+                "Your commitment spans two days! Impressive! ⏰",
+                "Two days of focused energy! 🚀"
+            ]}
+        ],
+        three_days: [
+            { emoji: '⚡', text: '3 Days!', class: 'strong', messages: [
+                "Three days of dedication! You're on fire! 🔥",
+                "Three days achievement! Real progress shows! 📊",
+                "72 hours milestone! Your commitment shines! ✨",
+                "Three days of consistency! Building habits! 🏗️",
+                "Three days strong! Your determination grows! 💪"
+            ]},
+            { emoji: '⚡', text: '3 Days!', class: 'strong', messages: [
+                "Three days of pure determination! 🔥",
+                "72 hours of excellence! Quality sustained! ⭐",
+                "Three days achievement! Momentum building! 💨",
+                "Your commitment spans three days! Amazing! ⏰",
+                "Three days of focused energy! ⚡"
+            ]}
+        ],
+        week_days: [
+            { emoji: '💎', text: '{{days}} Days!', class: 'strong', messages: [
+                "Day {{days}} and still going! You're a diamond! 💎",
+                "Day {{days}} achievement! Your persistence shines! ✨",
+                "Day {{days}} milestone! Building real strength! 💪",
+                "Day {{days}} of commitment! True dedication! ⏱️",
+                "Day {{days}} strong! Your journey continues! 🌟"
+            ]},
+            { emoji: '💎', text: '{{days}} Days!', class: 'strong', messages: [
+                "Day {{days}} of pure determination! 🔥",
+                "Day {{days}} of excellence! Quality sustained! ⭐",
+                "Day {{days}} achievement! Progress accelerates! 🚀",
+                "Your commitment reaches day {{days}}! Amazing! ⏰",
+                "Day {{days}} of focused energy! 💎"
+            ]}
+        ],
+        one_week: [
+            { emoji: '🌟', text: '1 Week!', class: 'strong', messages: [
+                "One full week! You're building real habits! 🌟",
+                "Seven days achievement! Consistency emerges! 📅",
+                "One week milestone! Your dedication shows! 💪",
+                "Seven days of progress! Building momentum! 💨",
+                "One week commitment! You're committed! 🔥"
+            ]},
+            { emoji: '🌟', text: '1 Week!', class: 'strong', messages: [
+                "One week of pure determination! 🔥",
+                "Seven days of excellence! Quality sustained! ⭐",
+                "One week achievement! Pattern established! 🔄",
+                "Your commitment spans one week! Impressive! ⏰",
+                "One week of focused energy! 🌟"
+            ]}
+        ],
+        two_weeks: [
+            { emoji: '⚡', text: '2 Weeks!', class: 'fire', messages: [
+                "Two weeks of consistency! You're electric! ⚡",
+                "Fourteen days achievement! Real habits form! 📅",
+                "Two weeks milestone! Your commitment shines! ✨",
+                "Fourteen days of progress! Building strength! 💪",
+                "Two weeks commitment! You're unstoppable! 🔥"
+            ]},
+            { emoji: '⚡', text: '2 Weeks!', class: 'fire', messages: [
+                "Two weeks of pure determination! 🔥",
+                "Fourteen days of excellence! Quality sustained! ⭐",
+                "Two weeks achievement! Deep focus mastery! 🌊",
+                "Your commitment spans two weeks! Amazing! ⏰",
+                "Two weeks of focused energy! ⚡"
+            ]}
+        ],
+        three_weeks: [
+            { emoji: '🎆', text: '3 Weeks!', class: 'fire', messages: [
+                "Three weeks! You're a celebration of consistency! 🎆",
+                "Twenty-one days achievement! Habits solidified! 📅",
+                "Three weeks milestone! Your dedication glows! ✨",
+                "Twenty-one days of progress! Building legacy! 🏛️",
+                "Three weeks commitment! You're incredible! 🔥"
+            ]},
+            { emoji: '🎆', text: '3 Weeks!', class: 'fire', messages: [
+                "Three weeks of pure determination! 🔥",
+                "Twenty-one days of excellence! Quality sustained! ⭐",
+                "Three weeks achievement! Transformation complete! ✨",
+                "Your commitment spans three weeks! Legendary! ⏰",
+                "Three weeks of focused energy! 🎆"
+            ]}
+        ],
+        one_month: [
+            { emoji: '👑', text: '1 Month!', class: 'fire', messages: [
+                "One month of dedication! You're royalty! 👑",
+                "Thirty days achievement! True transformation! 📅",
+                "One month milestone! Your commitment reigns! ✨",
+                "Thirty days of progress! Building empires! 🏗️",
+                "One month commitment! You're a champion! 🏆"
+            ]},
+            { emoji: '👑', text: '1 Month!', class: 'fire', messages: [
+                "One month of pure determination! 🔥",
+                "Thirty days of excellence! Quality sustained! ⭐",
+                "One month achievement! Legendary status! 👑",
+                "Your commitment spans one month! Incredible! ⏰",
+                "One month of focused energy! 👑"
+            ]}
+        ],
+        two_months: [
+            { emoji: '🥈', text: '2 Months!', class: 'fire', messages: [
+                "Two months of excellence! Silver medal worthy! 🥈",
+                "Sixty days achievement! True mastery! 📅",
+                "Two months milestone! Your dedication shines! ✨",
+                "Sixty days of progress! Building greatness! 🏛️",
+                "Two months commitment! You're elite! 🏆"
+            ]},
+            { emoji: '🥈', text: '2 Months!', class: 'fire', messages: [
+                "Two months of pure determination! 🔥",
+                "Sixty days of excellence! Quality sustained! ⭐",
+                "Two months achievement! Champion level! 🥇",
+                "Your commitment spans two months! Amazing! ⏰",
+                "Two months of focused energy! 🥈"
+            ]}
+        ],
+        hundred_days: [
+            { emoji: '💯', text: '100 Days!', class: 'fire', messages: [
+                "100 DAYS! You're absolutely legendary! 💯",
+                "One hundred days achievement! Century club! 📅",
+                "100 days milestone! Your dedication is eternal! ✨",
+                "One hundred days of progress! Building legends! 🏛️",
+                "100 days commitment! You're a true warrior! ⚔️"
+            ]},
+            { emoji: '💯', text: '100 Days!', class: 'fire', messages: [
+                "100 days of pure determination! 🔥",
+                "One hundred days of excellence! Quality sustained! ⭐",
+                "100 days achievement! Legendary status! 💯",
+                "Your commitment spans 100 days! Incredible! ⏰",
+                "100 days of focused energy! 💯"
+            ]}
+        ],
+        legend_days: [
+            { emoji: '👑', text: '{{days}} Days LEGEND!', class: 'fire', messages: [
+                "Day {{days}} - you're a living legend! 👑",
+                "Day {{days}} achievement! Legendary status! 📅",
+                "Day {{days}} milestone! Your dedication is eternal! ✨",
+                "Day {{days}} of progress! Building eternal legacy! 🏛️",
+                "Day {{days}} commitment! You're immortal! 🔥"
+            ]},
+            { emoji: '👑', text: '{{days}} Days LEGEND!', class: 'fire', messages: [
+                "Day {{days}} of pure determination! 🔥",
+                "Day {{days}} of excellence! Quality sustained! ⭐",
+                "Day {{days}} achievement! God-like focus! 👑",
+                "Your commitment reaches day {{days}}! Legendary! ⏰",
+                "Day {{days}} of focused energy! 👑"
+            ]}
+        ],
+        champion_days: [
+            { emoji: '🌟', text: '{{days}} Days CHAMPION!', class: 'fire', messages: [
+                "Day {{days}} - you're an eternal champion! 🌟",
+                "Day {{days}} achievement! Champion forever! 📅",
+                "Day {{days}} milestone! Your dedication is infinite! ✨",
+                "Day {{days}} of progress! Building eternal greatness! 🏛️",
+                "Day {{days}} commitment! You're timeless! 🔥"
+            ]},
+            { emoji: '🌟', text: '{{days}} Days CHAMPION!', class: 'fire', messages: [
+                "Day {{days}} of pure determination! 🔥",
+                "Day {{days}} of excellence! Quality eternal! ⭐",
+                "Day {{days}} achievement! Champion of champions! 🏆",
+                "Your commitment spans day {{days}}! Eternal! ⏰",
+                "Day {{days}} of focused energy! 🌟"
+            ]}
+        ]
+    }
+};
+
 // Goal Tracker Application
 class GoalTracker {
     constructor() {
@@ -7,6 +386,17 @@ class GoalTracker {
         this.darkMode = localStorage.getItem('darkMode') === 'true';
         this.sortBy = 'newest';
         this.openMenus = this.loadOpenMenus();
+
+        // Initialize AudioContext for sound generation (optimize by reusing)
+        try {
+            this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        } catch (e) {
+            console.warn('Web Audio API not supported');
+            this.audioContext = null;
+        }
+
+        // Note: Message caching is now handled directly in goal objects for persistence
+        // The temporary messageCache and usedMessages are no longer needed
         this.init();
         this.startUpdateInterval();
     }
@@ -77,32 +467,36 @@ class GoalTracker {
     }
 
     playSound(type) {
-        if (!this.soundEnabled) return;
-        
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        const oscillator = audioContext.createOscillator();
-        const gainNode = audioContext.createGain();
-        
+        if (!this.soundEnabled || !this.audioContext) return;
+
+        // Resume AudioContext if it's suspended (required by modern browsers)
+        if (this.audioContext.state === 'suspended') {
+            this.audioContext.resume();
+        }
+
+        const oscillator = this.audioContext.createOscillator();
+        const gainNode = this.audioContext.createGain();
+
         oscillator.connect(gainNode);
-        gainNode.connect(audioContext.destination);
-        
+        gainNode.connect(this.audioContext.destination);
+
         if (type === 'success') {
             oscillator.frequency.value = 800;
-            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
-            oscillator.start(audioContext.currentTime);
-            oscillator.stop(audioContext.currentTime + 0.3);
+            gainNode.gain.setValueAtTime(0.3, this.audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + 0.3);
+            oscillator.start(this.audioContext.currentTime);
+            oscillator.stop(this.audioContext.currentTime + 0.3);
         } else if (type === 'milestone') {
             [600, 800, 1000].forEach((freq, i) => {
-                const osc = audioContext.createOscillator();
-                const gain = audioContext.createGain();
+                const osc = this.audioContext.createOscillator();
+                const gain = this.audioContext.createGain();
                 osc.connect(gain);
-                gain.connect(audioContext.destination);
+                gain.connect(this.audioContext.destination);
                 osc.frequency.value = freq;
-                gain.gain.setValueAtTime(0.2, audioContext.currentTime + i * 0.1);
-                gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + i * 0.1 + 0.3);
-                osc.start(audioContext.currentTime + i * 0.1);
-                osc.stop(audioContext.currentTime + i * 0.1 + 0.3);
+                gain.gain.setValueAtTime(0.2, this.audioContext.currentTime + i * 0.1);
+                gain.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + i * 0.1 + 0.3);
+                osc.start(this.audioContext.currentTime + i * 0.1);
+                osc.stop(this.audioContext.currentTime + i * 0.1 + 0.3);
             });
         }
     }
@@ -115,6 +509,11 @@ class GoalTracker {
             return;
         }
 
+        // Generate initial messages for the new goal
+        const initialTime = this.calculateTimeElapsed(Date.now(), 0, false, null);
+        const initialBadge = this.getStreakBadge(Date.now(), initialTime);
+        const initialMotivationalMsg = this.getMotivationalMessage(Date.now(), initialTime.days);
+
         const goal = {
             id: Date.now(),
             name: goalName,
@@ -124,7 +523,14 @@ class GoalTracker {
             pausedTime: 0,
             pausedAt: null,
             bestStreak: 0,
-            notes: ''
+            notes: '',
+            cachedBadge: {
+                emoji: initialBadge.emoji,
+                text: initialBadge.text,
+                class: initialBadge.class,
+                message: initialBadge.message
+            },
+            cachedMotivationalMsg: initialMotivationalMsg
         };
 
         this.goals.push(goal);
@@ -165,11 +571,15 @@ class GoalTracker {
                 if (currentStreak > goal.bestStreak) {
                     goal.bestStreak = currentStreak;
                 }
-                
+
                 goal.startTime = Date.now();
                 goal.pausedTime = 0;
                 goal.isPaused = false;
                 goal.pausedAt = null;
+
+                // Clear cached messages so new ones will be generated for the reset goal
+                goal.cachedBadge = null;
+                goal.cachedMotivationalMsg = null;
                 this.saveGoals();
                 this.render();
             }
@@ -182,6 +592,7 @@ class GoalTracker {
             const confirmDelete = confirm(`Delete "${goal.name}"?`);
             if (confirmDelete) {
                 this.goals = this.goals.filter(g => g.id !== goalId);
+                this.clearGoalMessages(goalId); // Clean up message tracking
                 this.saveGoals();
                 this.render();
             }
@@ -220,163 +631,234 @@ class GoalTracker {
         return value.toString().padStart(2, '0');
     }
 
-    getStreakBadge(time) {
+    getStreakBadge(goalId, time) {
         const { days, totalHours, totalMinutes } = time;
 
         // Very granular for first 24 hours
         if (days === 0) {
-            if (totalMinutes < 5) return {
-                emoji: '🌱',
-                text: 'Just Started!',
-                class: 'new',
-                message: 'Every journey begins with a single step! 🌟'
-            };
-            if (totalMinutes < 15) return {
-                emoji: '🌿',
-                text: '5+ Minutes!',
-                class: 'new',
-                message: 'Great momentum! Keep that energy flowing! 💫'
-            };
-            if (totalMinutes < 30) return {
-                emoji: '🍀',
-                text: '15+ Minutes!',
-                class: 'new',
-                message: 'You\'re building something amazing! 🌈'
-            };
-            if (totalHours < 1) return {
-                emoji: '🌳',
-                text: '30+ Minutes!',
-                class: 'building',
-                message: 'Half an hour of dedication! You\'re unstoppable! ⚡'
-            };
-            if (totalHours < 3) return {
-                emoji: '💪',
-                text: '1+ Hour!',
-                class: 'building',
-                message: 'An hour of focus! Your determination shines! ✨'
-            };
-            if (totalHours < 6) return {
-                emoji: '💫',
-                text: '3+ Hours!',
-                class: 'building',
-                message: 'Three hours of commitment! You\'re a force! 🚀'
-            };
-            if (totalHours < 12) return {
-                emoji: '⭐',
-                text: '6+ Hours!',
-                class: 'building',
-                message: 'Six hours of dedication! You\'re incredible! 🌟'
-            };
+            if (totalMinutes < 5) {
+                const badgeOption = this.selectUniqueMessage(goalId, 'badge', 'just_started');
+                return {
+                    emoji: badgeOption.emoji,
+                    text: badgeOption.text,
+                    class: badgeOption.class,
+                    message: badgeOption.messages[Math.floor(Math.random() * badgeOption.messages.length)]
+                };
+            }
+            if (totalMinutes < 15) {
+                const badgeOption = this.selectUniqueMessage(goalId, 'badge', 'five_minutes');
+                return {
+                    emoji: badgeOption.emoji,
+                    text: badgeOption.text,
+                    class: badgeOption.class,
+                    message: badgeOption.messages[Math.floor(Math.random() * badgeOption.messages.length)]
+                };
+            }
+            if (totalMinutes < 30) {
+                const badgeOption = this.selectUniqueMessage(goalId, 'badge', 'fifteen_minutes');
+                return {
+                    emoji: badgeOption.emoji,
+                    text: badgeOption.text,
+                    class: badgeOption.class,
+                    message: badgeOption.messages[Math.floor(Math.random() * badgeOption.messages.length)]
+                };
+            }
+            if (totalHours < 1) {
+                const badgeOption = this.selectUniqueMessage(goalId, 'badge', 'thirty_minutes');
+                return {
+                    emoji: badgeOption.emoji,
+                    text: badgeOption.text,
+                    class: badgeOption.class,
+                    message: badgeOption.messages[Math.floor(Math.random() * badgeOption.messages.length)]
+                };
+            }
+            if (totalHours < 3) {
+                const badgeOption = this.selectUniqueMessage(goalId, 'badge', 'one_hour');
+                return {
+                    emoji: badgeOption.emoji,
+                    text: badgeOption.text,
+                    class: badgeOption.class,
+                    message: badgeOption.messages[Math.floor(Math.random() * badgeOption.messages.length)]
+                };
+            }
+            if (totalHours < 6) {
+                const badgeOption = this.selectUniqueMessage(goalId, 'badge', 'three_hours');
+                return {
+                    emoji: badgeOption.emoji,
+                    text: badgeOption.text,
+                    class: badgeOption.class,
+                    message: badgeOption.messages[Math.floor(Math.random() * badgeOption.messages.length)]
+                };
+            }
+            if (totalHours < 12) {
+                const badgeOption = this.selectUniqueMessage(goalId, 'badge', 'six_hours');
+                return {
+                    emoji: badgeOption.emoji,
+                    text: badgeOption.text,
+                    class: badgeOption.class,
+                    message: badgeOption.messages[Math.floor(Math.random() * badgeOption.messages.length)]
+                };
+            }
+            const badgeOption = this.selectUniqueMessage(goalId, 'badge', 'twelve_hours');
             return {
-                emoji: '✨',
-                text: '12+ Hours!',
-                class: 'strong',
-                message: 'Half a day of consistency! You\'re amazing! 🎯'
+                emoji: badgeOption.emoji,
+                text: badgeOption.text,
+                class: badgeOption.class,
+                message: badgeOption.messages[Math.floor(Math.random() * badgeOption.messages.length)]
             };
         }
 
         // Day-based milestones
-        if (days === 1) return {
-            emoji: '🎯',
-            text: '1 Day!',
-            class: 'strong',
-            message: 'Your first full day! A beautiful beginning! 🌅'
-        };
-        if (days === 2) return {
-            emoji: '🚀',
-            text: '2 Days!',
-            class: 'strong',
-            message: 'Two days strong! Your momentum is building! 💪'
-        };
-        if (days === 3) return {
-            emoji: '⚡',
-            text: '3 Days!',
-            class: 'strong',
-            message: 'Three days of dedication! You\'re on fire! 🔥'
-        };
-        if (days < 7) return {
-            emoji: '💎',
-            text: `${days} Days!`,
-            class: 'strong',
-            message: `Day ${days} and still going! You\'re a diamond! 💎`
-        };
-        if (days === 7) return {
-            emoji: '🌟',
-            text: '1 Week!',
-            class: 'strong',
-            message: 'One full week! You\'re building real habits! 🌟'
-        };
-        if (days < 14) return {
-            emoji: '🔥',
-            text: `${days} Days!`,
-            class: 'fire',
-            message: `Day ${days} of your streak! Keep that fire burning! 🔥`
-        };
-        if (days === 14) return {
-            emoji: '⚡',
-            text: '2 Weeks!',
-            class: 'fire',
-            message: 'Two weeks of consistency! You\'re electric! ⚡'
-        };
-        if (days < 21) return {
-            emoji: '💥',
-            text: `${days} Days!`,
-            class: 'fire',
-            message: `Day ${days} - you\'re exploding with progress! 💥`
-        };
-        if (days === 21) return {
-            emoji: '🎆',
-            text: '3 Weeks!',
-            class: 'fire',
-            message: 'Three weeks! You\'re a celebration of consistency! 🎆'
-        };
-        if (days < 30) return {
-            emoji: '🔥',
-            text: `${days} Days!`,
-            class: 'fire',
-            message: `Day ${days} of your amazing streak! 🔥`
-        };
-        if (days === 30) return {
-            emoji: '👑',
-            text: '1 Month!',
-            class: 'fire',
-            message: 'One month of dedication! You\'re royalty! 👑'
-        };
-        if (days < 60) return {
-            emoji: '🏅',
-            text: `${days} Days!`,
-            class: 'fire',
-            message: `Day ${days} - you\'re earning your medal! 🏅`
-        };
-        if (days === 60) return {
-            emoji: '🥈',
-            text: '2 Months!',
-            class: 'fire',
-            message: 'Two months of excellence! Silver medal worthy! 🥈'
-        };
-        if (days < 100) return {
-            emoji: '🏆',
-            text: `${days} Days!`,
-            class: 'fire',
-            message: `Day ${days} - you\'re a champion in the making! 🏆`
-        };
-        if (days === 100) return {
-            emoji: '💯',
-            text: '100 Days!',
-            class: 'fire',
-            message: '100 DAYS! You\'re absolutely legendary! 💯'
-        };
-        if (days < 365) return {
-            emoji: '👑',
-            text: `${days} Days LEGEND!`,
-            class: 'fire',
-            message: `Day ${days} - you\'re a living legend! 👑`
-        };
+        if (days === 1) {
+            const badgeOption = this.selectUniqueMessage(goalId, 'badge', 'one_day');
+            return {
+                emoji: badgeOption.emoji,
+                text: badgeOption.text,
+                class: badgeOption.class,
+                message: badgeOption.messages[Math.floor(Math.random() * badgeOption.messages.length)]
+            };
+        }
+        if (days === 2) {
+            const badgeOption = this.selectUniqueMessage(goalId, 'badge', 'two_days');
+            return {
+                emoji: badgeOption.emoji,
+                text: badgeOption.text,
+                class: badgeOption.class,
+                message: badgeOption.messages[Math.floor(Math.random() * badgeOption.messages.length)]
+            };
+        }
+        if (days === 3) {
+            const badgeOption = this.selectUniqueMessage(goalId, 'badge', 'three_days');
+            return {
+                emoji: badgeOption.emoji,
+                text: badgeOption.text,
+                class: badgeOption.class,
+                message: badgeOption.messages[Math.floor(Math.random() * badgeOption.messages.length)]
+            };
+        }
+        if (days < 7) {
+            const badgeOption = this.selectUniqueMessage(goalId, 'badge', 'week_days');
+            return {
+                emoji: badgeOption.emoji,
+                text: badgeOption.text.replace('{{days}}', days),
+                class: badgeOption.class,
+                message: badgeOption.messages[Math.floor(Math.random() * badgeOption.messages.length)].replace(/\{\{days\}\}/g, days)
+            };
+        }
+        if (days === 7) {
+            const badgeOption = this.selectUniqueMessage(goalId, 'badge', 'one_week');
+            return {
+                emoji: badgeOption.emoji,
+                text: badgeOption.text,
+                class: badgeOption.class,
+                message: badgeOption.messages[Math.floor(Math.random() * badgeOption.messages.length)]
+            };
+        }
+        if (days < 14) {
+            const badgeOption = this.selectUniqueMessage(goalId, 'badge', 'week_days');
+            return {
+                emoji: badgeOption.emoji,
+                text: badgeOption.text.replace('{{days}}', days),
+                class: badgeOption.class,
+                message: badgeOption.messages[Math.floor(Math.random() * badgeOption.messages.length)].replace(/\{\{days\}\}/g, days)
+            };
+        }
+        if (days === 14) {
+            const badgeOption = this.selectUniqueMessage(goalId, 'badge', 'two_weeks');
+            return {
+                emoji: badgeOption.emoji,
+                text: badgeOption.text,
+                class: badgeOption.class,
+                message: badgeOption.messages[Math.floor(Math.random() * badgeOption.messages.length)]
+            };
+        }
+        if (days < 21) {
+            const badgeOption = this.selectUniqueMessage(goalId, 'badge', 'week_days');
+            return {
+                emoji: badgeOption.emoji,
+                text: badgeOption.text.replace('{{days}}', days),
+                class: badgeOption.class,
+                message: badgeOption.messages[Math.floor(Math.random() * badgeOption.messages.length)].replace(/\{\{days\}\}/g, days)
+            };
+        }
+        if (days === 21) {
+            const badgeOption = this.selectUniqueMessage(goalId, 'badge', 'three_weeks');
+            return {
+                emoji: badgeOption.emoji,
+                text: badgeOption.text,
+                class: badgeOption.class,
+                message: badgeOption.messages[Math.floor(Math.random() * badgeOption.messages.length)]
+            };
+        }
+        if (days < 30) {
+            const badgeOption = this.selectUniqueMessage(goalId, 'badge', 'week_days');
+            return {
+                emoji: badgeOption.emoji,
+                text: badgeOption.text.replace('{{days}}', days),
+                class: badgeOption.class,
+                message: badgeOption.messages[Math.floor(Math.random() * badgeOption.messages.length)].replace(/\{\{days\}\}/g, days)
+            };
+        }
+        if (days === 30) {
+            const badgeOption = this.selectUniqueMessage(goalId, 'badge', 'one_month');
+            return {
+                emoji: badgeOption.emoji,
+                text: badgeOption.text,
+                class: badgeOption.class,
+                message: badgeOption.messages[Math.floor(Math.random() * badgeOption.messages.length)]
+            };
+        }
+        if (days < 60) {
+            const badgeOption = this.selectUniqueMessage(goalId, 'badge', 'week_days');
+            return {
+                emoji: badgeOption.emoji,
+                text: badgeOption.text.replace('{{days}}', days),
+                class: badgeOption.class,
+                message: badgeOption.messages[Math.floor(Math.random() * badgeOption.messages.length)].replace(/\{\{days\}\}/g, days)
+            };
+        }
+        if (days === 60) {
+            const badgeOption = this.selectUniqueMessage(goalId, 'badge', 'two_months');
+            return {
+                emoji: badgeOption.emoji,
+                text: badgeOption.text,
+                class: badgeOption.class,
+                message: badgeOption.messages[Math.floor(Math.random() * badgeOption.messages.length)]
+            };
+        }
+        if (days < 100) {
+            const badgeOption = this.selectUniqueMessage(goalId, 'badge', 'legend_days');
+            return {
+                emoji: badgeOption.emoji,
+                text: badgeOption.text.replace('{{days}}', days),
+                class: badgeOption.class,
+                message: badgeOption.messages[Math.floor(Math.random() * badgeOption.messages.length)].replace(/\{\{days\}\}/g, days)
+            };
+        }
+        if (days === 100) {
+            const badgeOption = this.selectUniqueMessage(goalId, 'badge', 'hundred_days');
+            return {
+                emoji: badgeOption.emoji,
+                text: badgeOption.text,
+                class: badgeOption.class,
+                message: badgeOption.messages[Math.floor(Math.random() * badgeOption.messages.length)]
+            };
+        }
+        if (days < 365) {
+            const badgeOption = this.selectUniqueMessage(goalId, 'badge', 'legend_days');
+            return {
+                emoji: badgeOption.emoji,
+                text: badgeOption.text.replace('{{days}}', days),
+                class: badgeOption.class,
+                message: badgeOption.messages[Math.floor(Math.random() * badgeOption.messages.length)].replace(/\{\{days\}\}/g, days)
+            };
+        }
+        const badgeOption = this.selectUniqueMessage(goalId, 'badge', 'champion_days');
         return {
-            emoji: '🌟',
-            text: `${days} Days CHAMPION!`,
-            class: 'fire',
-            message: `Day ${days} - you\'re an eternal champion! 🌟`
+            emoji: badgeOption.emoji,
+            text: badgeOption.text.replace('{{days}}', days),
+            class: badgeOption.class,
+            message: badgeOption.messages[Math.floor(Math.random() * badgeOption.messages.length)].replace(/\{\{days\}\}/g, days)
         };
     }
 
@@ -404,29 +886,28 @@ class GoalTracker {
         return { next: null, progress: 100, label: 'max' };
     }
 
-    getMotivationalMessage(days) {
-        const messages = [
-            "You're doing amazing! 🌟",
-            "Keep up the great work! 💪",
-            "Every day counts! 🎯",
-            "You've got this! 🚀",
-            "Consistency is key! 🔑",
-            "Stay strong! 💎",
-            "You're unstoppable! ⚡",
-            "One day at a time! 🌈",
-            "You're on fire! 🔥",
-            "Believe in yourself! ✨",
-            "Progress over perfection! 🎨",
-            "You're a champion! 🏆"
-        ];
-        
-        if (days === 0) return "Great start! The first step is always the hardest! 🌱";
-        if (days === 1) return "You made it one full day! Incredible! 🎉";
-        if (days === 7) return "One full week! You're building a real habit! 🌟";
-        if (days === 30) return "30 days! You're a habit-building machine! 👑";
-        if (days === 100) return "100 DAYS! You're absolutely legendary! 💯";
-        
-        return messages[days % messages.length];
+    getMotivationalMessage(goalId, days) {
+        // Check for specific milestone messages first
+        if (days === 0) {
+            return this.selectUniqueMessage(goalId, 'general', 0);
+        }
+        if (days === 1) {
+            return this.selectUniqueMessage(goalId, 'general', 1);
+        }
+        if (days === 7) {
+            return this.selectUniqueMessage(goalId, 'general', 7);
+        }
+        if (days === 30) {
+            return this.selectUniqueMessage(goalId, 'general', 30);
+        }
+        if (days === 100) {
+            return this.selectUniqueMessage(goalId, 'general', 100);
+        }
+
+        // For non-milestone days, use the general message pool with variety
+        const messageIndex = Math.floor(Math.random() * MESSAGE_ALTERNATIVES.general.default.length);
+        const messageOptions = MESSAGE_ALTERNATIVES.general.default[messageIndex];
+        return this.selectUniqueMessage(goalId, 'general', messageIndex, messageOptions);
     }
 
     getColorGradient(color) {
@@ -587,9 +1068,29 @@ class GoalTracker {
 
     createGoalCard(goal) {
         const time = this.calculateTimeElapsed(goal.startTime, goal.pausedTime, goal.isPaused, goal.pausedAt);
-        const badge = this.getStreakBadge(time);
+
+        // Use cached messages if available, otherwise generate new ones (for backward compatibility)
+        let badge, motivationalMsg;
+        if (goal.cachedBadge && goal.cachedMotivationalMsg) {
+            // Use cached messages
+            badge = goal.cachedBadge;
+            motivationalMsg = goal.cachedMotivationalMsg;
+        } else {
+            // Generate new messages for goals without cached messages (backward compatibility)
+            badge = this.getStreakBadge(goal.id, time);
+            motivationalMsg = badge.message || this.getMotivationalMessage(goal.id, time.days);
+
+            // Cache the newly generated messages
+            goal.cachedBadge = {
+                emoji: badge.emoji,
+                text: badge.text,
+                class: badge.class,
+                message: badge.message
+            };
+            goal.cachedMotivationalMsg = motivationalMsg;
+        }
+
         const milestone = this.getNextMilestone(time);
-        const motivationalMsg = badge.message || this.getMotivationalMessage(time.days);
         
         const card = document.createElement('div');
         const isMenuOpen = this.openMenus.includes(goal.id);
@@ -807,7 +1308,7 @@ class GoalTracker {
         this.goals.forEach(goal => {
             const time = this.calculateTimeElapsed(goal.startTime, goal.pausedTime, goal.isPaused, goal.pausedAt);
             const card = document.querySelector(`[data-goal-id="${goal.id}"]`);
-            
+
             if (card) {
                 const statValues = card.querySelectorAll('.stat-value');
                 if (statValues.length === 4) {
@@ -816,43 +1317,45 @@ class GoalTracker {
                     statValues[1].textContent = this.formatTime(time.hours);
                     statValues[2].textContent = this.formatTime(time.minutes);
                     statValues[3].textContent = this.formatTime(time.seconds);
-                    
+
                     // Check for milestone achievements and show celebration
                     if (time.days > oldDays && !isNaN(oldDays) && !goal.isPaused) {
                         const milestones = [1, 2, 3, 7, 14, 21, 30, 60, 100, 365];
                         if (milestones.includes(time.days)) {
                             this.showCelebration('🎉🎊🏆');
                             this.playSound('milestone');
+
+                            // Update cached messages for the new milestone
+                            const newBadge = this.getStreakBadge(goal.id, time);
+                            const newMotivationalMsg = this.getMotivationalMessage(goal.id, time.days);
+
+                            goal.cachedBadge = {
+                                emoji: newBadge.emoji,
+                                text: newBadge.text,
+                                class: newBadge.class,
+                                message: newBadge.message
+                            };
+                            goal.cachedMotivationalMsg = newMotivationalMsg;
+                            this.saveGoals();
                         }
                     }
-                    
+
                     // Update progress bar
                     const milestone = this.getNextMilestone(time);
                     const progressFill = card.querySelector('.progress-bar-fill');
                     const milestoneText = card.querySelector('.milestone-text');
-                    
+
                     if (progressFill && milestone.next !== null) {
                         progressFill.style.width = `${milestone.progress}%`;
                         milestoneText.textContent = `Next: ${milestone.label} 🎯 (${Math.round(milestone.progress)}%)`;
                     }
-                    
-                    // Update badge
-                    const badge = this.getStreakBadge(time);
-                    const streakBadge = card.querySelector('.streak-badge');
-                    if (streakBadge) {
-                        streakBadge.className = `streak-badge ${badge.class}`;
-                        streakBadge.textContent = `${badge.emoji} ${badge.text}`;
-                    }
 
-                    // Update motivational message if it exists
-                    const motivationalElement = card.querySelector('.motivational-message');
-                    if (motivationalElement) {
-                        motivationalElement.textContent = badge.message || 'Keep going! You\'re doing great! 🌟';
-                    }
+                    // Motivational messages and badges should NOT be updated here - they are set once when the card is created
+                    // and should remain consistent for each goal unless explicitly changed
                 }
             }
         });
-        
+
         // Update overall stats
         this.updateOverallStats();
     }
@@ -874,10 +1377,17 @@ class GoalTracker {
         const saved = localStorage.getItem('goalTrackerData');
         const goals = saved ? JSON.parse(saved) : [];
 
-        // Ensure existing goals have a color property
+        // Ensure existing goals have required properties
         goals.forEach(goal => {
             if (!goal.color) {
                 goal.color = 'gray'; // Default color for existing goals
+            }
+            // Initialize cached messages for existing goals that don't have them
+            if (!goal.cachedBadge) {
+                goal.cachedBadge = null;
+            }
+            if (!goal.cachedMotivationalMsg) {
+                goal.cachedMotivationalMsg = null;
             }
         });
 
@@ -897,6 +1407,68 @@ class GoalTracker {
         const div = document.createElement('div');
         div.textContent = text;
         return div.innerHTML;
+    }
+
+    // Simplified message selection - now uses persistent caching in goal objects
+    selectUniqueMessage(goalId, category, key, alternatives = null) {
+        // Get available alternatives
+        let messageOptions = [];
+        if (alternatives) {
+            messageOptions = alternatives;
+        } else {
+            // Use default alternatives structure
+            if (category === 'general') {
+                if (MESSAGE_ALTERNATIVES.general.milestones[key]) {
+                    messageOptions = MESSAGE_ALTERNATIVES.general.milestones[key];
+                } else {
+                    // For general messages, select from the default array based on index
+                    const defaultMessages = MESSAGE_ALTERNATIVES.general.default;
+                    messageOptions = defaultMessages[key % defaultMessages.length] || [defaultMessages[0][0]];
+                }
+            } else if (category === 'badge') {
+                if (MESSAGE_ALTERNATIVES.streak_badges[key]) {
+                    messageOptions = MESSAGE_ALTERNATIVES.streak_badges[key];
+                }
+            }
+        }
+
+        // Select randomly from available options
+        let selectedOption;
+        if (typeof messageOptions[0] === 'string') {
+            // Simple string array
+            selectedOption = messageOptions[Math.floor(Math.random() * messageOptions.length)];
+        } else {
+            // Badge object array
+            selectedOption = messageOptions[Math.floor(Math.random() * messageOptions.length)];
+        }
+
+        return selectedOption;
+    }
+
+    // Legacy cleanup methods (no longer used with persistent caching)
+    clearGoalMessages(goalId) {
+        // This method is now a no-op since message tracking is handled in goal objects
+    }
+
+    refreshMessageCache() {
+        // Optional method to refresh all cached messages (for variety)
+        this.goals.forEach(goal => {
+            goal.cachedBadge = null;
+            goal.cachedMotivationalMsg = null;
+        });
+        this.saveGoals();
+        this.render(); // This will trigger new message selection
+    }
+
+    // Method to manually refresh a specific goal's messages
+    refreshGoalMessages(goalId) {
+        const goal = this.goals.find(g => g.id === goalId);
+        if (goal) {
+            goal.cachedBadge = null;
+            goal.cachedMotivationalMsg = null;
+            this.saveGoals();
+            this.render();
+        }
     }
 }
 

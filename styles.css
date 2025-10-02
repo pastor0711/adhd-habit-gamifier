@@ -79,17 +79,20 @@ body.dark-mode .goal-title {
 body.dark-mode .btn-reset,
 body.dark-mode .btn-delete,
 body.dark-mode .btn-pause,
-body.dark-mode .btn-notes {
+body.dark-mode .btn-notes,
+body.dark-mode .btn-color {
     background: #1f2937;
     border-color: #4b5563;
 }
 
+/* Button color variations */
 body.dark-mode .btn-pause {
     color: #fbbf24;
     border-color: #f59e0b;
 }
 
-body.dark-mode .btn-notes {
+body.dark-mode .btn-notes,
+body.dark-mode .btn-color {
     color: #a78bfa;
     border-color: #8b5cf6;
 }
@@ -109,7 +112,8 @@ body.dark-mode .btn-pause:hover {
     border-color: #fbbf24;
 }
 
-body.dark-mode .btn-notes:hover {
+body.dark-mode .btn-notes:hover,
+body.dark-mode .btn-color:hover {
     background: #5b21b6;
     border-color: #c4b5fd;
 }

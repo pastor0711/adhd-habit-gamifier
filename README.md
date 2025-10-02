@@ -84,9 +84,9 @@ Try the app live at: **[https://pastor0711.github.io/adhd-habit-gamifier/](https
 - **View Stats**: See your overall progress at the top of the page
 
 ### Milestones & Achievements
-- **First Hour**: Get badges every 5-15 minutes as you start
+- **First Hour**: Get badges every 5, 15, 30 minutes, then 1, 3, 6, 12 hours
 - **First Day**: Hourly achievements up to 24 hours
-- **Long Term**: Special badges at 1, 2, 3, 7, 14, 21, 30, 60, 100, and 365 days!
+- **Long Term**: Special badges at 1, 2, 3, 7, 14, 21, 30, 60, 100 days, and beyond!
 
 ## Technical Details
 
@@ -126,17 +126,17 @@ Your goals earn increasingly impressive badges as you progress:
 - 🌟 1 Week! - "One full week! You're building real habits! 🌟"
 
 **Week 2-4:**
-- 🔥 8-13 Days!
-- ⚡ 2 Weeks!
-- 💥 15-20 Days!
-- 🎆 3 Weeks!
-- 👑 1 Month!
+- 💎 8-13 Days! - "Day X and still going! You're a diamond! 💎"
+- ⚡ 2 Weeks! - "Two weeks of consistency! You're electric! ⚡"
+- 💎 15-20 Days! - "Day X and still going! You're a diamond! 💎"
+- 🎆 3 Weeks! - "Three weeks! You're a celebration of consistency! 🎆"
+- 👑 1 Month! - "One month of dedication! You're royalty! 👑"
 
 **Beyond:**
-- 👑 1 Month! - "One month of dedication! You're royalty! 👑"
 - 🥈 2 Months! - "Two months of excellence! Silver medal worthy! 🥈"
 - 💯 100 Days! - "100 DAYS! You're absolutely legendary! 💯"
-- 🌟 365 Days CHAMPION! - "Day 365 - you're an eternal champion! 🌟"
+- 👑 200+ Days LEGEND! - "Day X - you're a living legend! 👑"
+- 🌟 365+ Days CHAMPION! - "Day X - you're an eternal champion! 🌟"
 
 ## Screenshots
 
