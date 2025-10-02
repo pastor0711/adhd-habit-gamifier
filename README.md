@@ -4,6 +4,10 @@ A beautiful, ADHD-friendly web application to track your goals and build lasting
 
 **Created by [@pastor0711](https://github.com/pastor0711)**
 
+## 🚀 Live Demo
+
+Try the app live at: **[https://pastor0711.github.io/adhd-habit-gamifier/](https://pastor0711.github.io/adhd-habit-gamifier/)**
+
 ## ADHD-Friendly Features
 
 ### 🎯 Granular Achievement System
