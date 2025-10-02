@@ -6,6 +6,7 @@ class GoalTracker {
         this.soundEnabled = localStorage.getItem('soundEnabled') !== 'false';
         this.darkMode = localStorage.getItem('darkMode') === 'true';
         this.sortBy = 'newest';
+        this.openMenus = this.loadOpenMenus();
         this.init();
         this.startUpdateInterval();
     }
@@ -548,6 +549,42 @@ class GoalTracker {
         }
     }
 
+    toggleGoalActions(goalId) {
+        const card = document.querySelector(`[data-goal-id="${goalId}"]`);
+        if (!card) return;
+
+        const menu = card.querySelector('.goal-actions-menu');
+        const actions = card.querySelector('.goal-actions');
+        const toggle = card.querySelector('.goal-toggle');
+
+        const isVisible = menu.classList.contains('visible');
+
+        if (isVisible) {
+            // Collapse
+            menu.classList.remove('visible');
+            actions.classList.add('collapsed');
+            toggle.classList.remove('expanded');
+            toggle.setAttribute('aria-expanded', 'false');
+            card.classList.remove('expanded');
+            // Remove from open menus
+            this.openMenus = this.openMenus.filter(id => id !== goalId);
+        } else {
+            // Expand
+            menu.classList.add('visible');
+            actions.classList.remove('collapsed');
+            toggle.classList.add('expanded');
+            toggle.setAttribute('aria-expanded', 'true');
+            card.classList.add('expanded');
+            // Add to open menus
+            if (!this.openMenus.includes(goalId)) {
+                this.openMenus.push(goalId);
+            }
+        }
+        
+        // Save open menus state
+        this.saveOpenMenus();
+    }
+
     createGoalCard(goal) {
         const time = this.calculateTimeElapsed(goal.startTime, goal.pausedTime, goal.isPaused, goal.pausedAt);
         const badge = this.getStreakBadge(time);
@@ -555,7 +592,11 @@ class GoalTracker {
         const motivationalMsg = badge.message || this.getMotivationalMessage(time.days);
         
         const card = document.createElement('div');
+        const isMenuOpen = this.openMenus.includes(goal.id);
         card.className = goal.isPaused ? 'goal-card paused' : 'goal-card';
+        if (isMenuOpen) {
+            card.classList.add('expanded');
+        }
         card.setAttribute('data-goal-id', goal.id);
         card.style.borderLeftColor = this.getBorderColor(goal.color);
         
@@ -582,12 +623,38 @@ class GoalTracker {
         ` : '';
         
         card.innerHTML = `
-            <div class="goal-header">
-                <h3 class="goal-title">
-                    ${this.escapeHtml(goal.name)}
-                    <span class="streak-badge ${badge.class}">${badge.emoji} ${badge.text}</span>
-                </h3>
-                <div class="goal-actions">
+            <div class="goal-content">
+                <div class="goal-header">
+                    <h3 class="goal-title">
+                        ${this.escapeHtml(goal.name)}
+                        <span class="streak-badge ${badge.class}">${badge.emoji} ${badge.text}</span>
+                    </h3>
+                    <button class="goal-toggle ${isMenuOpen ? 'expanded' : ''}" data-id="${goal.id}" tabindex="0" aria-label="Toggle controls" aria-expanded="${isMenuOpen}">⋮</button>
+                </div>
+                ${milestoneHTML}
+                ${bestStreakHTML}
+                <div class="goal-stats">
+                    <div class="stat-box">
+                        <div class="stat-value">${time.days}</div>
+                        <div class="stat-label">Days</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">${this.formatTime(time.hours)}</div>
+                        <div class="stat-label">Hours</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">${this.formatTime(time.minutes)}</div>
+                        <div class="stat-label">Minutes</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">${this.formatTime(time.seconds)}</div>
+                        <div class="stat-label">Seconds</div>
+                    </div>
+                </div>
+                <div class="motivational-message">${motivationalMsg}</div>
+            </div>
+            <div class="goal-actions-menu ${isMenuOpen ? 'visible' : ''}">
+                <div class="goal-actions ${isMenuOpen ? '' : 'collapsed'}">
                     <button class="btn-color" data-id="${goal.id}">🎨 Color</button>
                     <button class="btn-pause" data-id="${goal.id}">${goal.isPaused ? '▶️ Resume' : '⏸️ Pause'}</button>
                     <button class="btn-notes" data-id="${goal.id}">📝 Notes</button>
@@ -595,27 +662,6 @@ class GoalTracker {
                     <button class="btn-delete" data-id="${goal.id}">🗑️ Delete</button>
                 </div>
             </div>
-            ${milestoneHTML}
-            ${bestStreakHTML}
-            <div class="goal-stats">
-                <div class="stat-box">
-                    <div class="stat-value">${time.days}</div>
-                    <div class="stat-label">Days</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-value">${this.formatTime(time.hours)}</div>
-                    <div class="stat-label">Hours</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-value">${this.formatTime(time.minutes)}</div>
-                    <div class="stat-label">Minutes</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-value">${this.formatTime(time.seconds)}</div>
-                    <div class="stat-label">Seconds</div>
-                </div>
-            </div>
-            <div class="motivational-message">${motivationalMsg}</div>
         `;
 
         // Add event listeners
@@ -637,6 +683,22 @@ class GoalTracker {
 
         card.querySelector('.btn-delete').addEventListener('click', () => {
             this.deleteGoal(goal.id);
+        });
+
+        // Add toggle button event listener
+        const toggleButton = card.querySelector('.goal-toggle');
+        toggleButton.addEventListener('click', (e) => {
+            this.toggleGoalActions(goal.id);
+            e.stopPropagation(); // Prevent event bubbling
+        });
+
+        // Add keyboard navigation support
+        toggleButton.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                this.toggleGoalActions(goal.id);
+                e.preventDefault();
+                e.stopPropagation();
+            }
         });
 
         return card;
@@ -820,6 +882,15 @@ class GoalTracker {
         });
 
         return goals;
+    }
+
+    loadOpenMenus() {
+        const saved = localStorage.getItem('openMenusState');
+        return saved ? JSON.parse(saved) : [];
+    }
+
+    saveOpenMenus() {
+        localStorage.setItem('openMenusState', JSON.stringify(this.openMenus));
     }
 
     escapeHtml(text) {
