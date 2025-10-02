@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goal Streak Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 Goal Streak Tracker</h1>
+            <p class="subtitle">Track your goals and build lasting habits</p>
+        </header>
+
+        <div id="statsOverview" class="stats-overview hidden">
+            <!-- Overall stats will be shown here -->
+        </div>
+
+        <div class="add-goal-section">
+            <input 
+                type="text" 
+                id="goalInput" 
+                placeholder="Enter a new goal (e.g., Daily Exercise, Reading)"
+                maxlength="50"
+            >
+            <div class="color-picker">
+                <div class="color-option" data-color="gray" style="background: #6b7280" title="Gray"></div>
+                <div class="color-option" data-color="blue" style="background: #3b82f6" title="Blue"></div>
+                <div class="color-option" data-color="green" style="background: #10b981" title="Green"></div>
+                <div class="color-option" data-color="amber" style="background: #f59e0b" title="Amber"></div>
+                <div class="color-option" data-color="rose" style="background: #f43f5e" title="Rose"></div>
+                <div class="color-option" data-color="purple" style="background: #8b5cf6" title="Purple"></div>
+            </div>
+            <button id="addGoalBtn" class="btn-primary">
+                <span>+</span> Add Goal
+            </button>
+        </div>
+
+        <div class="controls-section">
+            <div class="sort-controls">
+                <label>Sort by:</label>
+                <select id="sortSelect">
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                    <option value="longest">Longest Streak</option>
+                    <option value="shortest">Shortest Streak</option>
+                </select>
+            </div>
+            <div class="button-group">
+                <button id="toggleDarkMode" class="btn-sound" title="Toggle Dark Mode">
+                    🌙 Dark Mode
+                </button>
+                <button id="toggleSound" class="btn-sound" title="Toggle Sound">
+                    🔊 Sound On
+                </button>
+            </div>
+        </div>
+
+        <div id="goalsContainer" class="goals-container">
+            <!-- Goals will be dynamically added here -->
+        </div>
+
+        <div id="emptyState" class="empty-state">
+            <div class="empty-icon">📊</div>
+            <h3>No goals yet</h3>
+            <p>Start tracking your first goal above!</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
